@@ -11,7 +11,7 @@
           </li>
         </ul>
         <!-- Ícono de carrito de compras alineado a la derecha -->
-        <router-link class="nav-link ms-auto" to="/CarroDeCompras">
+        <router-link class="nav-link ms-auto" to="/carro-de-compras">
           <i class="bi bi-cart fs-4"></i>
         </router-link>
       </div>

@@ -7,11 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-<<<<<<< HEAD
     "axios": "^1.13.2",
-=======
     "bootstrap": "^5.3.8",
->>>>>>> 3b75ae1be3c3211a62a7d35d8dc0d7bdf0deb2b2
     "pinia": "^3.0.4",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
