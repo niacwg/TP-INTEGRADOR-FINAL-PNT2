@@ -86,29 +86,32 @@ export default {
 
 <style scoped>
 .producto-individual {
-  padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+
 .producto-detalle {
   display: grid;
-  grid-template-columns: 400px 1fr;
+   grid-template-columns: 400px 1fr;
   align-items: center;
   gap: 30px;
   padding: 20px;
   min-height: 80vh;
 }
 
+
 .producto-imagen {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%; 
+  background-color: #f5f5f5; 
 }
 
 .producto-imagen img {
-  max-width: 250px;
-  max-height: 300px;
+  max-width: 300px;               
+  max-height: 340px;                
   width: 100%;
   height: auto;
   object-fit: contain;
@@ -116,83 +119,82 @@ export default {
 }
 
 .producto-info {
-  padding: 20px;
+  padding: 10px 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;  
-  text-align: center;  
+  text-align: center;
 }
 
 .producto-info h1 {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   color: #2c3e50;
 }
 
 .categoria {
   color: #666;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .descripcion {
-  line-height: 1.6;
-  margin-bottom: 20px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  max-width: 600px;
+  text-align: justify; 
+  color: #000;
 }
 
 .precio {
   font-size: 24px;
   font-weight: bold;
   color: #42b983;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .quantity-controls {
-  display: inline-flex;        
+  display: inline-flex;
   align-items: center;
   border: 1px solid #ddd;
   border-radius: 6px;
-  padding: 5px 10px;
+  padding: 4px 10px;
   background-color: #fff;
   margin-bottom: 20px;
-  gap: 10px;                      
+  gap: 10px;
 }
 
 .btn-quantity {
   border: none;
   background: none;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   padding: 0 6px;
   cursor: pointer;
   color: #555;
-  transition: color 0.2s ease;
-}
-
-.btn-quantity:hover {
-  color: #000;
 }
 
 .quantity-input {
-  width: 30px;
+  width: 28px;
   text-align: center;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
 }
-
 
 .btn-volver {
   background-color: #42b983;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 26px;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 8px;
 }
 
 .btn-volver:hover {
   background-color: #3aa876;
 }
 
-.loading, .error {
+.loading,
+.error {
   text-align: center;
   padding: 40px;
   font-size: 18px;
@@ -202,5 +204,26 @@ export default {
   .producto-detalle {
     grid-template-columns: 1fr;
   }
+
+  .producto-imagen {
+    margin-bottom: 16px;
+  }
 }
+
+.btn-volver {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 10px 26px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-volver:hover {
+  background-color: #222;
+}
+
+
 </style>
