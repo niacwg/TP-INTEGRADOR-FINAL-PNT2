@@ -40,6 +40,9 @@
             <button class="btn-favorite" title="Agregar a favoritos">
               <i class="bi bi-heart"></i>
             </button>
+            <button class="btn btn-link p-0" @click="verDetalle(producto.id)">
+             Ver detalle
+            </button>
           </div>
           <div class="product-price">
             <span class="price">${{ producto.price }}</span>
@@ -50,7 +53,7 @@
       <div class="cart-summary">
         <div class="total">
           <span>Total:</span>
-          <span v-if="globalStore && globalStore.getCantidadTotal" class="total-amount">${{ globalStore.getCantidadTotal().toFixed(2) }}</span>
+          <span v-if="globalStore && globalStore.getCantidadTotal" class="total-amount">${{ globalStore.getCantidadTotal.toFixed(2) }}</span>
         </div>
         <button class="btn btn-success w-100">Completar pedido</button>
       </div>

@@ -10,16 +10,21 @@
 
     <div v-else class="producto-detalle">
       <div class="producto-imagen">
-        <img :src="producto.imagen" :alt="producto.nombre">
+        <img :src="producto.image" :alt="producto.title">
       </div>
       
       <div class="producto-info">
-        <h1>{{ producto.nombre }}</h1>
-        <p class="categoria">Categoría: {{ producto.categoria }}</p>
-        <p class="descripcion">{{ producto.descripcion }}</p>
-        <p class="precio">${{ producto.precio }}</p>
+        <h1>{{ producto.title }}</h1>
+        <p class="categoria">Categoría: {{ producto.category }}</p>
+        <p class="descripcion">{{ producto.description }}</p>
+        <p class="precio">
+          ${{ producto.price.toLocaleString('es-AR') }}
+        </p>
         <button class="btn-volver" @click="volverAtras">
           Volver
+        </button>
+        <button class="btn-agregar" @click="agregarAlCarrito">
+        Agregar al carrito
         </button>
       </div>
     </div>
@@ -27,26 +32,43 @@
 </template>
 
 <script>
+import ServicioProductos from '../servicios/productos' 
+import { useGlobalStore } from '@/estadoGlobal/global'
+
+const servicioProductos = new ServicioProductos()
+
 export default {
   name: 'ProductoIndividual',
   data() {
     return {
       producto: null,
-      loading: true
+      loading: true,
+      globalStore: useGlobalStore()
     }
   },
   methods: {
     volverAtras() {
       this.$router.go(-1)
+    },
+    async cargarProducto() {
+      this.loading = true
+      const id = this.$route.params.id   // viene de /producto/:id
+      const producto = await servicioProductos.getById(id)
+      this.producto = producto
+      this.loading = false
+    },
+    agregarAlCarrito() {
+      if (this.producto) {
+        this.globalStore.agregarProducto(this.producto)
+        alert('Producto agregado al carrito 🛒')
+      }
     }
   },
   mounted() {
-    // Aquí irá la lógica para obtener el producto específico
-    this.loading = false
+    this.cargarProducto()
   }
 }
 </script>
-
 <style scoped>
 .producto-individual {
   padding: 20px;
@@ -56,15 +78,25 @@ export default {
 
 .producto-detalle {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 400px 1fr; 
+  align-items: center;             
   gap: 30px;
   padding: 20px;
+  min-height: 80vh;                
+}
+
+.producto-imagen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .producto-imagen img {
+  max-width: 250px;   
+  max-height: 300px;  
   width: 100%;
-  max-width: 500px;
   height: auto;
+  object-fit: contain;
   border-radius: 8px;
 }
 
@@ -118,4 +150,19 @@ export default {
     grid-template-columns: 1fr;
   }
 }
+
+.btn-agregar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.btn-agregar:hover {
+  background-color: #0069d9;
+}
+
 </style>
