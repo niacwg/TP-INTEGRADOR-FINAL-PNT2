@@ -20,19 +20,39 @@
         <p class="precio">
           ${{ producto.price.toLocaleString('es-AR') }}
         </p>
-        <button class="btn-volver" @click="volverAtras">
-          Volver
-        </button>
-        <button class="btn-agregar" @click="agregarAlCarrito">
-        Agregar al carrito
-        </button>
+
+        <div class="quantity-controls">
+          <button
+            class="btn-quantity"
+            @click="globalStore.eliminarProducto(producto.id)"
+          >
+            -
+          </button>
+
+          <span class="quantity-input">
+            {{ globalStore.getCantidadProducto(producto.id) }}
+          </span>
+
+          <button
+            class="btn-quantity"
+            @click="globalStore.agregarProducto(producto)"
+          >
+            +
+          </button>
+        </div>
+
+        <div class="acciones">
+          <button class="btn-volver" @click="volverAtras">
+            Volver
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ServicioProductos from '../servicios/productos' 
+import ServicioProductos from '../servicios/productos'
 import { useGlobalStore } from '@/estadoGlobal/global'
 
 const servicioProductos = new ServicioProductos()
@@ -43,7 +63,7 @@ export default {
     return {
       producto: null,
       loading: true,
-      globalStore: useGlobalStore()
+      globalStore: useGlobalStore()   
     }
   },
   methods: {
@@ -52,16 +72,10 @@ export default {
     },
     async cargarProducto() {
       this.loading = true
-      const id = this.$route.params.id   // viene de /producto/:id
+      const id = this.$route.params.id
       const producto = await servicioProductos.getById(id)
       this.producto = producto
       this.loading = false
-    },
-    agregarAlCarrito() {
-      if (this.producto) {
-        this.globalStore.agregarProducto(this.producto)
-        alert('Producto agregado al carrito 🛒')
-      }
     }
   },
   mounted() {
@@ -69,6 +83,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .producto-individual {
   padding: 20px;
@@ -78,11 +93,11 @@ export default {
 
 .producto-detalle {
   display: grid;
-  grid-template-columns: 400px 1fr; 
-  align-items: center;             
+  grid-template-columns: 400px 1fr;
+  align-items: center;
   gap: 30px;
   padding: 20px;
-  min-height: 80vh;                
+  min-height: 80vh;
 }
 
 .producto-imagen {
@@ -92,8 +107,8 @@ export default {
 }
 
 .producto-imagen img {
-  max-width: 250px;   
-  max-height: 300px;  
+  max-width: 250px;
+  max-height: 300px;
   width: 100%;
   height: auto;
   object-fit: contain;
@@ -102,6 +117,10 @@ export default {
 
 .producto-info {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  text-align: center;  
 }
 
 .producto-info h1 {
@@ -125,6 +144,40 @@ export default {
   color: #42b983;
   margin-bottom: 20px;
 }
+
+.quantity-controls {
+  display: inline-flex;        
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 5px 10px;
+  background-color: #fff;
+  margin-bottom: 20px;
+  gap: 10px;                      
+}
+
+.btn-quantity {
+  border: none;
+  background: none;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 0 6px;
+  cursor: pointer;
+  color: #555;
+  transition: color 0.2s ease;
+}
+
+.btn-quantity:hover {
+  color: #000;
+}
+
+.quantity-input {
+  width: 30px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
 
 .btn-volver {
   background-color: #42b983;
@@ -150,19 +203,4 @@ export default {
     grid-template-columns: 1fr;
   }
 }
-
-.btn-agregar {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 10px;
-}
-
-.btn-agregar:hover {
-  background-color: #0069d9;
-}
-
 </style>
