@@ -2,15 +2,21 @@ import { defineStore } from "pinia";
 
 export const useGlobalStore = defineStore("global", {
     state: () => ({
-        carrito: [],  
+        carrito: [],
+        guardados: [],
     }),
     getters: {
         getCarrito: state => state.carrito,
         getCantidadProducto: (state) => (id) => {
-         const producto = state.carrito.find(item => item.id === id);
-        return producto ? producto.cantidad : 0; 
-        },  
-    },  
+            const producto = state.carrito.find(item => item.id === id);
+            return producto ? producto.cantidad : 0;
+        },
+
+
+        totalItems: (state) => {
+            return state.carrito.reduce((total, producto) => total + (producto.cantidad || 0), 0);
+        },
+    },
     actions: {
         agregarProducto(producto) {
             if (!producto) return;
@@ -38,7 +44,29 @@ export const useGlobalStore = defineStore("global", {
                     productoExistente.cantidad--;
                 }
             }
-        }
+        },
+
+        removerProductoCompletamente(id) {
+            this.carrito = this.carrito.filter(item => item.id !== id);
+        },
+
+        removerItemGuardado(id) {
+            const index = this.carrito.findIndex(item => item.id === id);
+
+            if (index !== -1) {
+                const [item] = this.carrito.splice(index, 1);
+                this.guardados.push(item);
+            }
+        },
+
+        moverACarrito(id) {
+            const index = this.guardados.findIndex(item => item.id === id);
+
+            if (index !== -1) {
+                const [item] = this.guardados.splice(index, 1);
+                this.carrito.push(item);
+            }
+        },
     },
 });
 
