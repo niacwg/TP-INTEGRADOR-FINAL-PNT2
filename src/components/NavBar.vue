@@ -11,18 +11,28 @@
           </li>
         </ul>
         <!-- Ícono de carrito de compras alineado a la derecha -->
-        <router-link class="nav-link ms-auto" to="/carro-de-compras">
+        <router-link class="nav-link ms-auto position-relative" to="/carro-de-compras">
           <i class="bi bi-cart fs-4"></i>
+          <span v-if="globalStore.totalItems > 0" class="badge rounded-pill bg-danger cart-badge">
+            {{ globalStore.totalItems }}
+          </span>
         </router-link>
       </div>
     </div>
   </nav>
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
+
+import { useGlobalStore } from '@/estadoGlobal/global';
 export default {
-  name: 'NavBar'
+  name: 'NavBar',
+
+  setup() {
+    const globalStore = useGlobalStore();
+    return { globalStore };
+  }
 }
 </script>
 
@@ -33,12 +43,15 @@ export default {
 }
 
 .nav-link {
-  color: black; /* Color inicial */
-  transition: color 0.3s ease; /* Animación suave */
+  color: black;
+  /* Color inicial */
+  transition: color 0.3s ease;
+  /* Animación suave */
 }
 
 .nav-link:hover {
-  color: #004896; /* Color al hacer hover */
- text-decoration: underline;
+  color: #004896;
+  /* Color al hacer hover */
+  text-decoration: underline;
 }
 </style>
