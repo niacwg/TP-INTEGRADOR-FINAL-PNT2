@@ -49,9 +49,10 @@
           <span class="total-amount">${{ total }}</span>
         </div>
         <div class="d-grid gap-2 mt-3">
-          <button class="btn btn-success w-100" @click="procederPago">
+         <button class="btn btn-success w-100" @click="procederPago">
             Completar pedido
           </button>
+
           <button class="btn btn-outline-secondary w-100" @click="seguirComprando">
             Seguir comprando
           </button>

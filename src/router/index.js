@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+
 const routes = [
   {
     path: '/',
@@ -26,6 +27,7 @@ const routes = [
       return import(/* webpackChunkName: "carro-de-compras" */ '../views/CarroDeCompras.vue')
     }
   },
+
   {
     path: '/pagos',
     name: 'pagos',
