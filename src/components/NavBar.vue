@@ -9,6 +9,9 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/productos-generales">Productos Generales</router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/productos-favoritos">Favoritos</router-link>
+          </li>
         </ul>
         <!-- Ícono de carrito de compras alineado a la derecha -->
         <router-link class="nav-link ms-auto position-relative" to="/carro-de-compras">
