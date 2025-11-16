@@ -1,6 +1,8 @@
 <template>
   <div class="checkout-wrapper">
+
     <div v-if="!pagoProcesado" class="checkout-grid">
+
       <div class="checkout-form card">
         <h2>Información de Pago</h2>
 
@@ -16,7 +18,7 @@
               class="form-control"
               :class="{ 'is-invalid': errorNombre.mostrar }"
             />
-            <div v-if="errorNombre.mostrar" class="error-message">
+            <div v-if="errorNombre.mostrar" class="alert alert-danger my-1">
               {{ errorNombre.mensaje }}
             </div>
           </div>
@@ -32,7 +34,7 @@
               class="form-control"
               :class="{ 'is-invalid': errorNumeroTarjeta.mostrar }"
             />
-            <div v-if="errorNumeroTarjeta.mostrar" class="error-message">
+            <div v-if="errorNumeroTarjeta.mostrar" class="alert alert-danger my-1">
               {{ errorNumeroTarjeta.mensaje }}
             </div>
           </div>
@@ -49,7 +51,7 @@
                 class="form-control"
                 :class="{ 'is-invalid': errorCvv.mostrar }"
               />
-              <div v-if="errorCvv.mostrar" class="error-message">
+              <div v-if="errorCvv.mostrar" class="alert alert-danger my-1">
                 {{ errorCvv.mensaje }}
               </div>
             </div>
@@ -65,7 +67,7 @@
                 class="form-control"
                 :class="{ 'is-invalid': errorExpiracion.mostrar }"
               />
-              <div v-if="errorExpiracion.mostrar" class="error-message">
+              <div v-if="errorExpiracion.mostrar" class="alert alert-danger my-1">
                 {{ errorExpiracion.mensaje }}
               </div>
             </div>
@@ -108,7 +110,7 @@
 
     <div v-else class="pago-exitoso-wrapper">
       <div class="pago-exitoso-card">
-        Pago procesado correctamente. ¡Gracias por su compra!
+        Pago procesado correctamente ¡Gracias por su compra!
       </div>
     </div>
 
@@ -155,7 +157,7 @@ export default {
       let msg = ''
       if (!this.formData.numeroTarjeta) msg = 'Campo requerido'
       else if (!/^\d+$/.test(this.formData.numeroTarjeta)) msg = 'Solo números'
-      else if (this.formData.numeroTarjeta.length !== 16) msg = '16 dígitos'
+      else if (this.formData.numeroTarjeta.length !== 16) msg = 'Debe tener 16 dígitos'
       return { mensaje: msg, mostrar: msg && this.formDirty.numeroTarjeta, ok: !msg }
     },
 
@@ -282,5 +284,10 @@ export default {
   font-weight: bold;
   box-shadow: 0 0 25px rgba(0,0,0,0.18);
   border: 2px solid #3cc56a;
+}
+
+.alert.my-1 {
+  padding: 6px 10px;
+  font-size: 0.875rem;
 }
 </style>
