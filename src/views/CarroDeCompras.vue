@@ -117,11 +117,13 @@ export default {
     const globalStore = useGlobalStore();
     return {
       globalStore,
-      items: globalStore.carrito,
     };
   },
 
   computed: {
+    items() { 
+      return this.globalStore.carrito;
+    },
     total() {
       return this.globalStore.getCantidadTotal().toFixed(2);
     }

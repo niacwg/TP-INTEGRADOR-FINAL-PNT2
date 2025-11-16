@@ -82,7 +82,15 @@ export const useGlobalStore = defineStore("global", {
         },
         eliminarDeFavoritos(id) {
             this.productosFavoritos = this.productosFavoritos.filter(item => item.id !== id);
-        }
+        },
+
+        moverAGuardados(id) {
+            const index = this.carrito.findIndex(item => item.id === id);
+            if (index !== -1) {
+                const [item] = this.carrito.splice(index, 1);
+                this.guardados.push(item);
+            }
+        },
 
     },
 
