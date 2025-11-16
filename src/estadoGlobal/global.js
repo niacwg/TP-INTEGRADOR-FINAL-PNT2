@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 export const useGlobalStore = defineStore("global", {
     state: () => ({
         carrito: [],
+        productosFavoritos: [],
         guardados: [],
     }),
     getters: {
@@ -11,11 +12,13 @@ export const useGlobalStore = defineStore("global", {
             const producto = state.carrito.find(item => item.id === id);
             return producto ? producto.cantidad : 0;
         },
-
-
         totalItems: (state) => {
             return state.carrito.reduce((total, producto) => total + (producto.cantidad || 0), 0);
         },
+        esFavorito: (state) => (id) => {
+            return state.productosFavoritos.some(item => item.id === id);
+        },
+        getFavoritos: state => state.productosFavoritos, 
     },
     actions: {
         agregarProducto(producto) {
@@ -67,6 +70,21 @@ export const useGlobalStore = defineStore("global", {
                 this.carrito.push(item);
             }
         },
+        toggleFavorito(producto) {
+            const index = this.productosFavoritos.findIndex(item => item.id === producto.id);
+            if (index !== -1) {
+                this.productosFavoritos.splice(index, 1);
+                console.log("Producto removido de favoritos:", producto);
+            } else {
+                this.productosFavoritos.push(producto);
+                console.log("Producto agregado a favoritos:", producto);
+            }
+        },
+        eliminarDeFavoritos(id) {
+            this.productosFavoritos = this.productosFavoritos.filter(item => item.id !== id);
+        }
+
     },
+
 });
 

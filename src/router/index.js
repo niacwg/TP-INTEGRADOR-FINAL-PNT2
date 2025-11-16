@@ -13,11 +13,18 @@ const routes = [
       return import(/* webpackChunkName: "productos-generales" */ '../views/ProductosGenerales.vue')
     }
   },
-  {
-    path: '/producto/:id',
-    name: 'producto-individual',
+   {
+    path: '/productos-generales',
+    name: 'productos-generales',
     component: function () {
-      return import(/* webpackChunkName: "producto-individual" */ '../views/ProductoIndividual.vue')
+      return import(/* webpackChunkName: "productos-generales" */ '../views/ProductosGenerales.vue')
+    }
+  },
+  {
+    path: '/productos-favoritos',
+    name: 'productos-favoritos',
+    component: function () {
+      return import(/* webpackChunkName: "productos-favoritos" */ '../views/ProductosFavoritos.vue')
     }
   },
   {
@@ -34,7 +41,7 @@ const routes = [
     component: function () {
       return import(/* webpackChunkName: "pagos" */ '../views/Pagos.vue')
     }
-  }
+  },
 ]
 
 const router = createRouter({

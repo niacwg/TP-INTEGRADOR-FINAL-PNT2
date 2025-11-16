@@ -7,6 +7,18 @@ class ServicioProductos {
         this.#url = 'https://fakestoreapi.com/products'
     }
 
+    getById = async (id) => {
+        try {
+            const { data: producto } = await axios.get(`${this.#url}/${id}`)
+            console.log('Producto individual:', producto)
+            return producto
+        }
+        catch(error) {
+            console.error('Error GET producto por ID', error)
+            return null
+        }
+    }
+
     getAll = async () => {
 
         try {
