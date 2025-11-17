@@ -1,4 +1,7 @@
 <template>
+
+  <HeroSection/>
+
   <ListaProductos
     :productos="productos"
     :categorias="categories"
@@ -14,13 +17,15 @@
 </template>
 
 <script>
-import ServicioProductos from '@/servicios/productos.js'
+import ServicioProductos from '@/servicios/productos.js';
 import ListaProductos from '@/components/ListaProductos.vue';
+import HeroSection from '@/components/Hero.vue';
 
 export default {
   name: 'ProductosGenerales',
   components: {
-    ListaProductos
+    ListaProductos,
+    HeroSection
   },
   data() {
     return {

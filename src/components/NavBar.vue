@@ -1,13 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg nav-color">
+  <nav class="navbar navbar-expand-lg bg-primary">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <router-link class="nav-link" to="/">Inicio</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/productos-generales">Productos Generales</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/productos-favoritos">Favoritos</router-link>
@@ -46,7 +43,7 @@ export default {
 }
 
 .nav-link {
-  color: black;
+  color: white;
   /* Color inicial */
   transition: color 0.3s ease;
   /* Animación suave */
