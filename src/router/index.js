@@ -20,6 +20,11 @@ const routes = [
       return import(/* webpackChunkName: "productos-generales" */ '../views/ProductosGenerales.vue')
     }
   },
+   {
+    path: '/producto/:id',
+    name: 'producto-individual',
+    component: () => import('../views/ProductoIndividual.vue')
+  },
   {
     path: '/productos-favoritos',
     name: 'productos-favoritos',
