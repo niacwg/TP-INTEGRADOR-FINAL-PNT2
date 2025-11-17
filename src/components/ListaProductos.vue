@@ -140,8 +140,8 @@ export default {
     }
   },
   methods: {
-    verDetalle(id) {
-      this.$router.push({ name: 'detalle-producto', params: { id } });
+   verDetalle(id) {
+      this.$router.push({ name: 'producto-individual', params: { id } });
     }
   },
   emits: ['eliminar-producto', 'completar-pedido'],
