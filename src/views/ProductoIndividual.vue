@@ -183,7 +183,7 @@ export default {
 
 /* Botón volver */
 .btn-volver{
-  background:#0d6efd;
+  background:#498ff8;
   color:#fff;
   border:none;
   padding:10px 26px;
